@@ -4,14 +4,16 @@ using Go_Nosh.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Go_Nosh.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200415144439_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace Go_Nosh.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c28965ca-7d0a-40d2-b01d-2686f893afe8",
-                            ConcurrencyStamp = "89158045-1d13-43cf-a36f-eb3243e031db",
+                            Id = "9744974e-feb7-4310-9b53-3bf5df7b9b10",
+                            ConcurrencyStamp = "4d2261f4-181e-439e-aa53-fc8ffee20d03",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

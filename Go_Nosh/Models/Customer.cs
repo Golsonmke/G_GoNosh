@@ -35,7 +35,7 @@ namespace Go_Nosh.Models
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }
-        public int ZipCode { get; set; }
+     
         public string FavoriteFood { get; set; }
 
 

@@ -4,22 +4,146 @@ using Go_Nosh.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Go_Nosh.Data.Migrations
+namespace Go_Nosh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200415174111_Customer-FoodTruck-Owner")]
-    partial class CustomerFoodTruckOwner
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Go_Nosh.Models.Customer", b =>
+                {
+                    b.Property<string>("CustomerPrimaryKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FavoriteFood")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Zipcode")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerPrimaryKey");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.FoodTruck", b =>
+                {
+                    b.Property<string>("FoodTruckPrimaryKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodTruckName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodTruckPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Lng")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("Open_now")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Place_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriceRangeIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price_level")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Twitter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FoodTruckPrimaryKey");
+
+                    b.ToTable("FoodTrucks");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
+                {
+                    b.Property<int>("OwnerPrimary")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FoodTruckPrimarayKey")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("OwnerPrimary");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Owners");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -50,10 +174,24 @@ namespace Go_Nosh.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c28965ca-7d0a-40d2-b01d-2686f893afe8",
-                            ConcurrencyStamp = "89158045-1d13-43cf-a36f-eb3243e031db",
+                            Id = "661a7ff0-908f-4758-9dbd-dc028f616678",
+                            ConcurrencyStamp = "45cab6e1-f87d-4c22-8fb7-6d1a933b8b45",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "bcc3d454-9a3d-4edd-aaa5-b1b845db4e40",
+                            ConcurrencyStamp = "0dc53339-7f30-4d60-9b82-0b4f8450262d",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "ab8628af-5e51-48a9-94ee-f1eed087a25d",
+                            ConcurrencyStamp = "03b3c4f4-a64e-410a-8d72-28b6272f80bb",
+                            Name = "Owner",
+                            NormalizedName = "OWNER"
                         });
                 });
 
@@ -224,6 +362,20 @@ namespace Go_Nosh.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.Customer", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

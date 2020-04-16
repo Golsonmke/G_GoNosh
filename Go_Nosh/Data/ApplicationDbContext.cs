@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Go_Nosh.Models;
 
 namespace Go_Nosh.Data
 {
@@ -22,8 +23,31 @@ namespace Go_Nosh.Data
                 {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
-                }
-             );
+
+                } 
+                );
+            builder.Entity<IdentityRole>()
+               .HasData(new IdentityRole
+               {
+                   Name = "Customer",
+                   NormalizedName = "CUSTOMER"
+
+               }
+               );
+            builder.Entity<IdentityRole>()
+               .HasData(new IdentityRole
+               {
+                   Name = "Owner",
+                   NormalizedName = "OWNER"
+
+               }
+               );
+
+
+
         }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<FoodTruck> FoodTrucks { get; set; }
+        public DbSet<Owner> Owners { get; set; }
     }
 }

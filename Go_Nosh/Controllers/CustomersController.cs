@@ -52,6 +52,8 @@ namespace Go_Nosh.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
+           
+
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }

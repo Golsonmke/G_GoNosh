@@ -81,6 +81,9 @@ namespace Go_Nosh.Migrations
                     b.Property<float>("Lng")
                         .HasColumnType("real");
 
+                    b.Property<string>("MenuPic")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Open_now")
                         .HasColumnType("bit");
 
@@ -174,22 +177,22 @@ namespace Go_Nosh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "661a7ff0-908f-4758-9dbd-dc028f616678",
-                            ConcurrencyStamp = "45cab6e1-f87d-4c22-8fb7-6d1a933b8b45",
+                            Id = "aff9b0ed-3e1f-43a6-97ee-5f1e61847598",
+                            ConcurrencyStamp = "f1b1a743-a8fa-4dd0-a752-9c343afeadb9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bcc3d454-9a3d-4edd-aaa5-b1b845db4e40",
-                            ConcurrencyStamp = "0dc53339-7f30-4d60-9b82-0b4f8450262d",
+                            Id = "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1",
+                            ConcurrencyStamp = "b41db5a2-86a2-4990-9ba4-95fd003618d7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "ab8628af-5e51-48a9-94ee-f1eed087a25d",
-                            ConcurrencyStamp = "03b3c4f4-a64e-410a-8d72-28b6272f80bb",
+                            Id = "e636e116-4853-4df4-884e-3faf5d407f60",
+                            ConcurrencyStamp = "27078ce1-cd9b-4280-ba86-b3a2a98ca1df",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

@@ -17,7 +17,7 @@ namespace Go_Nosh.NewFolder
         }
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            var controller = context.RouteData.Values["controller"];
+            var controller = context.RouteData.Values["Controller"];
             if (controller.Equals("Home"))
             {
                 if (_claimsPrincipal.IsInRole("Customer"))

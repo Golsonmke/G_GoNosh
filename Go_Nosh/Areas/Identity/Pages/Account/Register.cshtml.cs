@@ -85,7 +85,7 @@ namespace Go_Nosh.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-               // user.EmailConfirmed = true;
+                user.EmailConfirmed = true;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

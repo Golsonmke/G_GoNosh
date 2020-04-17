@@ -47,6 +47,33 @@ namespace Go_Nosh.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FoodTrucks",
+                columns: table => new
+                {
+                    FoodTruckPrimaryKey = table.Column<string>(nullable: false),
+                    FoodTruckName = table.Column<string>(nullable: true),
+                    FoodTruckPhone = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    PriceRangeIndex = table.Column<int>(nullable: false),
+                    WebsiteUrl = table.Column<string>(nullable: true),
+                    Facebook = table.Column<string>(nullable: true),
+                    Twitter = table.Column<string>(nullable: true),
+                    Instagram = table.Column<string>(nullable: true),
+                    Open_now = table.Column<bool>(nullable: false),
+                    Lat = table.Column<float>(nullable: false),
+                    Lng = table.Column<float>(nullable: false),
+                    MenuPic = table.Column<string>(nullable: true),
+                    FoodType = table.Column<string>(nullable: true),
+                    Price_level = table.Column<int>(nullable: false),
+                    Rating = table.Column<float>(nullable: false),
+                    Place_Id = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FoodTrucks", x => x.FoodTruckPrimaryKey);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -176,20 +203,46 @@ namespace Go_Nosh.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4a7f9819-8e4f-4496-b31e-7639495f0c0f", "f0e8a87b-8cb1-4ecf-85e4-e717b199bf5d", "Admin", "ADMIN" });
+            migrationBuilder.CreateTable(
+                name: "Owners",
+                columns: table => new
+                {
+                    OwnerPrimary = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<int>(nullable: false),
+                    IdentityUserId = table.Column<string>(nullable: true),
+                    FoodTruckPrimarayKey = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Owners", x => x.OwnerPrimary);
+                    table.ForeignKey(
+                        name: "FK_Owners_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "71a161e5-a186-4353-9870-c5eb82aec01f", "1d55176e-51dc-495b-995e-f258eb79e2f0", "Customer", "CUSTOMER" });
+                values: new object[] { "aff9b0ed-3e1f-43a6-97ee-5f1e61847598", "f1b1a743-a8fa-4dd0-a752-9c343afeadb9", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "35c164c6-13e8-439b-a6af-71f62033fc57", "1e912fa4-61ed-4c5e-894a-0b5e4e7098ae", "Owner", "OWNER" });
+                values: new object[] { "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1", "b41db5a2-86a2-4990-9ba4-95fd003618d7", "Customer", "CUSTOMER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "e636e116-4853-4df4-884e-3faf5d407f60", "27078ce1-cd9b-4280-ba86-b3a2a98ca1df", "Owner", "OWNER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -234,6 +287,11 @@ namespace Go_Nosh.Migrations
                 name: "IX_Customer_IdentityUserId",
                 table: "Customer",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Owners_IdentityUserId",
+                table: "Owners",
+                column: "IdentityUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -255,6 +313,12 @@ namespace Go_Nosh.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "FoodTrucks");
+
+            migrationBuilder.DropTable(
+                name: "Owners");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

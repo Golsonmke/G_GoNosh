@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Go_Nosh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200415220400_init")]
+    [Migration("20200417204012_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,102 @@ namespace Go_Nosh.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("Go_Nosh.Models.FoodTruck", b =>
+                {
+                    b.Property<string>("FoodTruckPrimaryKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodTruckName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodTruckPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Lng")
+                        .HasColumnType("real");
+
+                    b.Property<string>("MenuPic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Open_now")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Place_Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriceRangeIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price_level")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Twitter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FoodTruckPrimaryKey");
+
+                    b.ToTable("FoodTrucks");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
+                {
+                    b.Property<int>("OwnerPrimary")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FoodTruckPrimarayKey")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("OwnerPrimary");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Owners");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -83,22 +179,22 @@ namespace Go_Nosh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4a7f9819-8e4f-4496-b31e-7639495f0c0f",
-                            ConcurrencyStamp = "f0e8a87b-8cb1-4ecf-85e4-e717b199bf5d",
+                            Id = "aff9b0ed-3e1f-43a6-97ee-5f1e61847598",
+                            ConcurrencyStamp = "f1b1a743-a8fa-4dd0-a752-9c343afeadb9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "71a161e5-a186-4353-9870-c5eb82aec01f",
-                            ConcurrencyStamp = "1d55176e-51dc-495b-995e-f258eb79e2f0",
+                            Id = "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1",
+                            ConcurrencyStamp = "b41db5a2-86a2-4990-9ba4-95fd003618d7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "35c164c6-13e8-439b-a6af-71f62033fc57",
-                            ConcurrencyStamp = "1e912fa4-61ed-4c5e-894a-0b5e4e7098ae",
+                            Id = "e636e116-4853-4df4-884e-3faf5d407f60",
+                            ConcurrencyStamp = "27078ce1-cd9b-4280-ba86-b3a2a98ca1df",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -274,6 +370,13 @@ namespace Go_Nosh.Migrations
                 });
 
             modelBuilder.Entity("Go_Nosh.Models.Customer", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+                });
+
+            modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()

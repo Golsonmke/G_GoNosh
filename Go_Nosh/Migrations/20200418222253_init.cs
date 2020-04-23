@@ -50,7 +50,8 @@ namespace Go_Nosh.Migrations
                 name: "FoodTrucks",
                 columns: table => new
                 {
-                    FoodTruckPrimaryKey = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FoodTruckName = table.Column<string>(nullable: true),
                     FoodTruckPhone = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
@@ -70,7 +71,7 @@ namespace Go_Nosh.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FoodTrucks", x => x.FoodTruckPrimaryKey);
+                    table.PrimaryKey("PK_FoodTrucks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,7 +184,8 @@ namespace Go_Nosh.Migrations
                 name: "Customer",
                 columns: table => new
                 {
-                    CustomerPrimaryKey = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     IdentityUserId = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -194,7 +196,7 @@ namespace Go_Nosh.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerPrimaryKey);
+                    table.PrimaryKey("PK_Customer", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Customer_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
@@ -207,7 +209,7 @@ namespace Go_Nosh.Migrations
                 name: "Owners",
                 columns: table => new
                 {
-                    OwnerPrimary = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -220,7 +222,7 @@ namespace Go_Nosh.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Owners", x => x.OwnerPrimary);
+                    table.PrimaryKey("PK_Owners", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Owners_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
@@ -232,17 +234,17 @@ namespace Go_Nosh.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "aff9b0ed-3e1f-43a6-97ee-5f1e61847598", "f1b1a743-a8fa-4dd0-a752-9c343afeadb9", "Admin", "ADMIN" });
+                values: new object[] { "cdc000fb-1c8e-46c0-8453-c51e38322f9e", "6d92da34-5b70-4d00-91e0-54a95176fa4f", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1", "b41db5a2-86a2-4990-9ba4-95fd003618d7", "Customer", "CUSTOMER" });
+                values: new object[] { "0c56a3d3-8031-43ac-8ed1-be071dcc3696", "9c31ba9c-0a1e-4ab0-9598-5f0120f14868", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e636e116-4853-4df4-884e-3faf5d407f60", "27078ce1-cd9b-4280-ba86-b3a2a98ca1df", "Owner", "OWNER" });
+                values: new object[] { "e7439168-f508-4ddf-8150-bc9f37ee554f", "18340461-342d-4d08-a8f2-e3202e6f651b", "Owner", "OWNER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

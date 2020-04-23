@@ -10,21 +10,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table-bordered">
+    <thead class="table-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FoodTruckName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FoodTruckPhone)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PriceRangeIndex)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.WebsiteUrl)
             </th>
@@ -40,12 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Open_now)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lng)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.MenuPic)
             </th>
@@ -58,9 +49,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Place_Id)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -70,15 +59,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FoodTruckName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FoodTruckPhone)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceRangeIndex)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.WebsiteUrl)
             </td>
@@ -94,12 +79,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Open_now)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lng)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.MenuPic)
             </td>
@@ -112,13 +92,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Place_Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FoodTruckPrimaryKey">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FoodTruckPrimaryKey">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FoodTruckPrimaryKey">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

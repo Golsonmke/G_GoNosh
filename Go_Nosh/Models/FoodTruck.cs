@@ -9,14 +9,9 @@ namespace Go_Nosh.Models
 {
     public class FoodTruck
     {
-        private readonly string _key;
 
-        public FoodTruck()
-        {
-            _key = Guid.NewGuid().ToString();
-        }
-        [Key]
-        public string FoodTruckPrimaryKey { get; set; }
+       
+        public int Id { get; set; }
 
         public string FoodTruckName { get; set; }
         public string FoodTruckPhone { get; set; } // formatted phone

@@ -1,9 +1,17 @@
-﻿namespace Go_Nosh.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace Go_Nosh.Models
 {
     public class FoodTruckAPI
     {
+        [Key]
+        public int Id { get; set; }
+        [NotMapped]
         public object[] html_attributions { get; set; }
         public string next_page_token { get; set; }
+        [NotMapped]
         public Result[] results { get; set; }
         public string status { get; set; }
     }
@@ -16,6 +24,7 @@
         public string id { get; set; }
         public string name { get; set; }
         public Opening_Hours opening_hours { get; set; }
+        [NotMapped]
         public Photo[] photos { get; set; }
         public string place_id { get; set; }
         public Plus_Code plus_code { get; set; }
@@ -70,6 +79,7 @@
     public class Photo
     {
         public int height { get; set; }
+        [NotMapped]
         public string[] html_attributions { get; set; }
         public string photo_reference { get; set; }
         public int width { get; set; }

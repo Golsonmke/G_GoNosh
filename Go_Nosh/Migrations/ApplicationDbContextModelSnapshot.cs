@@ -21,8 +21,10 @@ namespace Go_Nosh.Migrations
 
             modelBuilder.Entity("Go_Nosh.Models.Customer", b =>
                 {
-                    b.Property<string>("CustomerPrimaryKey")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -45,7 +47,7 @@ namespace Go_Nosh.Migrations
                     b.Property<int>("Zipcode")
                         .HasColumnType("int");
 
-                    b.HasKey("CustomerPrimaryKey");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
 
@@ -54,8 +56,10 @@ namespace Go_Nosh.Migrations
 
             modelBuilder.Entity("Go_Nosh.Models.FoodTruck", b =>
                 {
-                    b.Property<string>("FoodTruckPrimaryKey")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -105,14 +109,32 @@ namespace Go_Nosh.Migrations
                     b.Property<string>("WebsiteUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("FoodTruckPrimaryKey");
+                    b.HasKey("Id");
 
                     b.ToTable("FoodTrucks");
                 });
 
+            modelBuilder.Entity("Go_Nosh.Models.FoodTruckAPI", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("next_page_token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FoodTruckAPI");
+                });
+
             modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
                 {
-                    b.Property<int>("OwnerPrimary")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -141,7 +163,7 @@ namespace Go_Nosh.Migrations
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("OwnerPrimary");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
 
@@ -177,24 +199,31 @@ namespace Go_Nosh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aff9b0ed-3e1f-43a6-97ee-5f1e61847598",
-                            ConcurrencyStamp = "f1b1a743-a8fa-4dd0-a752-9c343afeadb9",
+                            Id = "07026bec-7c36-4272-8ee0-45096150a16d",
+                            ConcurrencyStamp = "a66b2038-7d12-4d0c-8872-e2336dec1b0f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1",
-                            ConcurrencyStamp = "b41db5a2-86a2-4990-9ba4-95fd003618d7",
+                            Id = "1b8e567c-e7bc-4356-a07c-68bb10ad0da2",
+                            ConcurrencyStamp = "66d6014d-1605-43be-a575-0f3662e857d0",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e636e116-4853-4df4-884e-3faf5d407f60",
-                            ConcurrencyStamp = "27078ce1-cd9b-4280-ba86-b3a2a98ca1df",
+                            Id = "7b3bed34-88be-4837-a49c-dfe5949c35f3",
+                            ConcurrencyStamp = "6a929cdd-7c5b-4bfe-a5e4-2db63aeb65b0",
                             Name = "Owner",
                             NormalizedName = "OWNER"
+                        },
+                        new
+                        {
+                            Id = "b171a7a8-ed2a-42bf-a94e-2a3834932b6e",
+                            ConcurrencyStamp = "0a2f9c0a-5b64-4169-af0b-cfd2e7284c47",
+                            Name = "FoodTruck",
+                            NormalizedName = "FOODTRUCK"
                         });
                 });
 

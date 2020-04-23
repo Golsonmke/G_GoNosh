@@ -19,14 +19,6 @@ namespace Go_Nosh.Data
             base.OnModelCreating(builder);
 
             builder.Entity<IdentityRole>()
-                .HasData(new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-
-                } 
-                );
-            builder.Entity<IdentityRole>()
                .HasData(new IdentityRole
                {
                    Name = "Customer",
@@ -42,12 +34,13 @@ namespace Go_Nosh.Data
 
                }
                );
-
+          
 
 
         }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
         public DbSet<Owner> Owners { get; set; }
+        
     }
 }

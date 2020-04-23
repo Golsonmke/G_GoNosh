@@ -31,16 +31,16 @@ namespace Go_Nosh.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
             var customer = await _context.Customer
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerPrimaryKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -52,8 +52,8 @@ namespace Go_Nosh.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-           
 
+            
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -63,14 +63,14 @@ namespace Go_Nosh.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Customer customer)
+        public async Task<IActionResult> Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                customer.IdentityUserId = userId;
+                //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                //customer.IdentityUserId = userId;
                 _context.Add(customer);
-                 _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
@@ -99,9 +99,9 @@ namespace Go_Nosh.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
-            if (id != customer.CustomerPrimaryKey)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -115,7 +115,7 @@ namespace Go_Nosh.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.CustomerPrimaryKey))
+                    if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -131,16 +131,16 @@ namespace Go_Nosh.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
             var customer = await _context.Customer
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerPrimaryKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -160,9 +160,9 @@ namespace Go_Nosh.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(string id)
+        private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.CustomerPrimaryKey == id);
+            return _context.Customer.Any(e => e.Id == id);
         }
     }
 }

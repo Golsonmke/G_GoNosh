@@ -26,7 +26,7 @@ namespace Go_Nosh.Controllers
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInOwner = _context.Owners.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var loggedInOwner = _context.Owners.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             return View(loggedInOwner);
         }
 
@@ -40,7 +40,7 @@ namespace Go_Nosh.Controllers
 
             var owner = await _context.Owners
                 .Include(o => o.IdentityUser)
-                .FirstOrDefaultAsync(m => m.OwnerPrimary == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();
@@ -61,7 +61,7 @@ namespace Go_Nosh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OwnerPrimary,FirstName,LastName,Email,PhoneNumber,Address,ZipCode,IdentityUserId,FoodTruckPrimarayKey")] Owner owner)
+        public async Task<IActionResult> Create( Owner owner)
         {
             if (ModelState.IsValid)
             {
@@ -95,9 +95,9 @@ namespace Go_Nosh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OwnerPrimary,FirstName,LastName,Email,PhoneNumber,Address,ZipCode,IdentityUserId,FoodTruckPrimarayKey")] Owner owner)
+        public async Task<IActionResult> Edit(int id,  Owner owner)
         {
-            if (id != owner.OwnerPrimary)
+            if (id != owner.Id)
             {
                 return NotFound();
             }
@@ -111,7 +111,7 @@ namespace Go_Nosh.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OwnerExists(owner.OwnerPrimary))
+                    if (!OwnerExists(owner.Id))
                     {
                         return NotFound();
                     }
@@ -136,7 +136,7 @@ namespace Go_Nosh.Controllers
 
             var owner = await _context.Owners
                 .Include(o => o.IdentityUser)
-                .FirstOrDefaultAsync(m => m.OwnerPrimary == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();
@@ -158,7 +158,7 @@ namespace Go_Nosh.Controllers
 
         private bool OwnerExists(int id)
         {
-            return _context.Owners.Any(e => e.OwnerPrimary == id);
+            return _context.Owners.Any(e => e.Id == id);
         }
     }
 }

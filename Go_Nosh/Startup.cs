@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Go_Nosh.NewFolder;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Go_Nosh.Models;
+using Go_Nosh.Contracts;
 
 namespace Go_Nosh
 {
@@ -44,6 +46,7 @@ namespace Go_Nosh
 
             });
             services.AddControllersWithViews();
+            services.AddScoped<IGoogleMapService, GoogleMapService>();
             services.AddRazorPages();
         }
 

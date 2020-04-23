@@ -7,34 +7,40 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Go_Nosh.Data;
 using Go_Nosh.Models;
+using Go_Nosh.Contracts;
 
 namespace Go_Nosh.Controllers
 {
     public class FoodTrucksController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IGoogleMapService _googleMapService;
         public FoodTrucksController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
 
         // GET: FoodTrucks
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.FoodTrucks.ToListAsync());
+            List<FoodTruck> foodTrucks = _context.FoodTrucks.ToList();
+            
+            
+            return View(foodTrucks);
+
         }
 
         // GET: FoodTrucks/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
             var foodTruck = await _context.FoodTrucks
-                .FirstOrDefaultAsync(m => m.FoodTruckPrimaryKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (foodTruck == null)
             {
                 return NotFound();
@@ -86,9 +92,9 @@ namespace Go_Nosh.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, FoodTruck foodTruck)
+        public async Task<IActionResult> Edit(int id, FoodTruck foodTruck)
         {
-            if (id != foodTruck.FoodTruckPrimaryKey)
+            if (id != foodTruck.Id)
             {
                 return NotFound();
             }
@@ -102,7 +108,7 @@ namespace Go_Nosh.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FoodTruckExists(foodTruck.FoodTruckPrimaryKey))
+                    if (!FoodTruckExists(foodTruck.Id))
                     {
                         return NotFound();
                     }
@@ -117,7 +123,7 @@ namespace Go_Nosh.Controllers
         }
 
         // GET: FoodTrucks/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -125,7 +131,7 @@ namespace Go_Nosh.Controllers
             }
 
             var foodTruck = await _context.FoodTrucks
-                .FirstOrDefaultAsync(m => m.FoodTruckPrimaryKey == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (foodTruck == null)
             {
                 return NotFound();
@@ -145,9 +151,9 @@ namespace Go_Nosh.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FoodTruckExists(string id)
+        private bool FoodTruckExists(int id)
         {
-            return _context.FoodTrucks.Any(e => e.FoodTruckPrimaryKey == id);
+            return _context.FoodTrucks.Any(e => e.Id == id);
         }
     }
 }

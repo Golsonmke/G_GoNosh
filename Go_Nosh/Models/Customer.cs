@@ -10,16 +10,11 @@ namespace Go_Nosh.Models
 {
     public class Customer
     {
-        private readonly string _key;
-
-        public Customer()
-        {
-            _key = Guid.NewGuid().ToString();
-        }
+       
 
 
         [Key]
-        public string CustomerPrimaryKey { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Go_Nosh.Models;
 using Go_Nosh.Data;
+using Go_Nosh.Contracts;
 
 namespace Go_Nosh.Controllers
 {
@@ -14,16 +15,20 @@ namespace Go_Nosh.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+      
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IGoogleMapService googleMapService)
         {
             _logger = logger;
             _context = context;
+           
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
+
             return View();
+          
         }
 
         public IActionResult Privacy()

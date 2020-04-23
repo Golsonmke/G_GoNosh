@@ -10,14 +10,10 @@ namespace Go_Nosh.Models
 {
     public class Owner
     {
-        private readonly string _key;
+       
 
-        public Owner()
-        {
-            _key = Guid.NewGuid().ToString();
-        }
         [Key]
-        public int OwnerPrimary{ get; set; }
+        public int Id{ get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

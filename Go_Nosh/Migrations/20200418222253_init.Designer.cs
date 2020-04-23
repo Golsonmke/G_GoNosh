@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Go_Nosh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200417204012_init")]
+    [Migration("20200418222253_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,8 +23,10 @@ namespace Go_Nosh.Migrations
 
             modelBuilder.Entity("Go_Nosh.Models.Customer", b =>
                 {
-                    b.Property<string>("CustomerPrimaryKey")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -47,7 +49,7 @@ namespace Go_Nosh.Migrations
                     b.Property<int>("Zipcode")
                         .HasColumnType("int");
 
-                    b.HasKey("CustomerPrimaryKey");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
 
@@ -56,8 +58,10 @@ namespace Go_Nosh.Migrations
 
             modelBuilder.Entity("Go_Nosh.Models.FoodTruck", b =>
                 {
-                    b.Property<string>("FoodTruckPrimaryKey")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -107,14 +111,14 @@ namespace Go_Nosh.Migrations
                     b.Property<string>("WebsiteUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("FoodTruckPrimaryKey");
+                    b.HasKey("Id");
 
                     b.ToTable("FoodTrucks");
                 });
 
             modelBuilder.Entity("Go_Nosh.Models.Owner", b =>
                 {
-                    b.Property<int>("OwnerPrimary")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -143,7 +147,7 @@ namespace Go_Nosh.Migrations
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("OwnerPrimary");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdentityUserId");
 
@@ -179,22 +183,22 @@ namespace Go_Nosh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aff9b0ed-3e1f-43a6-97ee-5f1e61847598",
-                            ConcurrencyStamp = "f1b1a743-a8fa-4dd0-a752-9c343afeadb9",
+                            Id = "cdc000fb-1c8e-46c0-8453-c51e38322f9e",
+                            ConcurrencyStamp = "6d92da34-5b70-4d00-91e0-54a95176fa4f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b22e4cfc-9efe-41ff-bee7-bcfa82d69ef1",
-                            ConcurrencyStamp = "b41db5a2-86a2-4990-9ba4-95fd003618d7",
+                            Id = "0c56a3d3-8031-43ac-8ed1-be071dcc3696",
+                            ConcurrencyStamp = "9c31ba9c-0a1e-4ab0-9598-5f0120f14868",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e636e116-4853-4df4-884e-3faf5d407f60",
-                            ConcurrencyStamp = "27078ce1-cd9b-4280-ba86-b3a2a98ca1df",
+                            Id = "e7439168-f508-4ddf-8150-bc9f37ee554f",
+                            ConcurrencyStamp = "18340461-342d-4d08-a8f2-e3202e6f651b",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

@@ -33,7 +33,7 @@ namespace Go_Nosh.Controllers
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -67,14 +67,14 @@ namespace Go_Nosh.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                //customer.IdentityUserId = userId;
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            return View(_context.FoodTrucks);
         }
 
         // GET: Customers/Edit/5
@@ -91,7 +91,7 @@ namespace Go_Nosh.Controllers
                 return NotFound();
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            return View(_context.FoodTrucks);
         }
 
         // POST: Customers/Edit/5
@@ -127,7 +127,7 @@ namespace Go_Nosh.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            return View();
         }
 
         // GET: Customers/Delete/5

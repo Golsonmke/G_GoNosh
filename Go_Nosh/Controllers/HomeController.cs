@@ -15,20 +15,21 @@ namespace Go_Nosh.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-      
+        private readonly IGoogleMapService _googleMapService;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IGoogleMapService googleMapService)
         {
             _logger = logger;
             _context = context;
-           
+            _googleMapService = googleMapService;
         }
 
         public  IActionResult Index()
         {
+            Task<FoodTruckAPI> foodTruckAPI = _googleMapService.GetFoodTruck();
+        
+            return View(foodTruckAPI);
 
-            return View();
-          
         }
 
         public IActionResult Privacy()

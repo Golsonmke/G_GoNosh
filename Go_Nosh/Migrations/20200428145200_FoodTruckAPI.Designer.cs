@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Go_Nosh.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200418222253_init")]
-    partial class init
+    [Migration("20200428145200_FoodTruckAPI")]
+    partial class FoodTruckAPI
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace Go_Nosh.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Go_Nosh.Models.FoodTruck", b =>
@@ -183,22 +183,15 @@ namespace Go_Nosh.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cdc000fb-1c8e-46c0-8453-c51e38322f9e",
-                            ConcurrencyStamp = "6d92da34-5b70-4d00-91e0-54a95176fa4f",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "0c56a3d3-8031-43ac-8ed1-be071dcc3696",
-                            ConcurrencyStamp = "9c31ba9c-0a1e-4ab0-9598-5f0120f14868",
+                            Id = "19489d00-992c-4dc8-bbf5-00e9f42feb8b",
+                            ConcurrencyStamp = "4859eaeb-2a76-4243-8ee9-1b23b36c63d0",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e7439168-f508-4ddf-8150-bc9f37ee554f",
-                            ConcurrencyStamp = "18340461-342d-4d08-a8f2-e3202e6f651b",
+                            Id = "d146b984-9ff2-45f5-85cb-0742378a6f73",
+                            ConcurrencyStamp = "3bd09cdc-b963-402c-975b-6e196930e4c2",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

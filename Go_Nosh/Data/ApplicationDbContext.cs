@@ -34,13 +34,14 @@ namespace Go_Nosh.Data
 
                }
                );
-          
+
 
 
         }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<FoodTruck> FoodTrucks { get; set; }
         public DbSet<Owner> Owners { get; set; }
-        
+
+
     }
 }

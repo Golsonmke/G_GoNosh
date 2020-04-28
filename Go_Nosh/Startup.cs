@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Go_Nosh.Data;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +11,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Go_Nosh.Models;
 using Go_Nosh.Contracts;
+using Go_Nosh.Services;
 
 namespace Go_Nosh
 {

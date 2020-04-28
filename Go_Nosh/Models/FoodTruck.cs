@@ -25,7 +25,7 @@ namespace Go_Nosh.Models
         public float Lat { get; set; }
         public float Lng { get; set; }
         public string MenuPic { get; set; }
-        public string  FoodType { get; set; }
+        public string FoodType { get; set; }
         public int Price_level { get; set; }
         public float Rating { get; set; }
         public string Place_Id { get; set; }

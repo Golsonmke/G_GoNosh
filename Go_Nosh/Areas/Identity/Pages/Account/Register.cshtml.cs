@@ -102,7 +102,7 @@ namespace Go_Nosh.Areas.Identity.Pages.Account
                     }
                     else if (Input.Role == "Owner")
                     {
-                        return RedirectToAction("Create", "Owners");
+                        return RedirectToAction("Create", "FoodTrucks");
                     }
                     //    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

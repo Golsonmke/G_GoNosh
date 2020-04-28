@@ -1,165 +1,71 @@
-﻿var map;
-var infowindow;
-var markers = [];
-var infowindow; 
-var currentcoords = {};
-
-
-
-function displaylocation() {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-
-    var plocation = document.getelementbyid("location");
-    plocation.innerhtml += latitude + " , " + longitude + "<br>";
-
-    showmap(position.coords);
-
-}
-function showmap(coords) {
-    var googlelatlong = new google.maps.latlng(coords.latitude, coords.longitude);
-
-    var mapoptions = {
-        zoom: 11,
-        center: googlelatlong,
-        maptypeid: google.maptypeid.roadmap
-
-    };
-
-    var mapdiv = document.getelementbyid("map");
-    map = new google.maps.map(mapdiv, mapoptions);
-    infowindow = new google.maps.infowindow();
-
-    google.maps.event.addlistener(map, "click", function (event) {
-        var latitude = event.latlng.lat();
-        var longitude = event.latlng.lng();
-        currentcoords.latitude = latitude;
-        currentcoords.longitude = longitude;
-
-        var plocation = document.getelementbyid("location");
-        plocation.innerhtml = latitude + " , " + longitude;
-        map.panto(event.latlng);
-
-        
-
+﻿
+function initAutocomplete() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 43.0334278,
+            lng: -87.90930279999999
+        },
+        zoom: 13,
+        mapTypeId: 'roadmap'
     });
-    showform();
-}
-function makeplacesrequest(lat, lng) {
-    var query = document.getelementbyid("query").value;
-    if (query) {
-        var placesrequest = {
-            location: new google.maps.latlng(lat, lng),
-            radius: 2000,
-            keyword: query
-        };
-        service.nearbysearch(placesrequest, function (results, status)
-{ 
-            if (status == google.maps.placces.placesservicestatus.ok) {
-                results.foreach(function (place) {
-                    //console.log(place);
-                    createmarker(place);
-                });
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function () {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // Clear out the old markers.
+        markers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function (place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
             }
         });
-    }else {
-        console.log("no query entered for places search");
-        
-    }
+        map.fitBounds(bounds);
+    });
 }
-function createmarker(place) {
-    var markeroptions = {
-        position: place.geometry.location,
-        map: map,
-        clickable: true
-    };
-
-    var marker = new google.maps.marker(markeroptions);
-    markers.push(marker);
-
-    google.maps.event.addlistener(marker, "click", function (place, marker) {
-        return function () {
-            if (place.vicinity) {
-                infowindow.setcontent(place.name + "<br>" + place.vicinity);
-            } else {
-                infowindow.setcontent(place.name);
-            }
-            infowindow.open(map, marker);
-
-        };
-    }(place, marker));
-}
-function clearmarkers() {
-    markers.foreach(function (marker) { marker.setmap(null); });
-    markers = [];
-}
-
-function showform() {
-    var searchform = document.getelementbyid("search");
-    searchform.style.visibility = "visible";
-    var button = document.queryselector("button");
-    button.onclick = function (e) {
-        e.preventdefault();
-        makeplacesrequest(currentcoords.latitude, currentcoords.longitude);
-        console.log("clicked the search button");
-    };
-}
-function displayerror(error) {
-    var errors = ["unknown error", "permission denied by user", "position not available", "timeout error"];
-    var message = errors[error.code];
-    console.warn("error in getting your location: " + message, error.message);
-}
-window.onload = function () {
-    if (navigator.geolocation) {
-        navigator.geolocation.getcurrentposition(displaylocation, displayerror);
-    }
-    else {
-        alert("sorry, this browser doesn't support geolocation")
-    }
-}
-
-//<html>
-//    <head>
-//        <title>simple map</title>
-//        <meta name="viewport" content="initial-scale=1.0">
-//            <meta charset="utf-8">
-//                <style>
-
-
-//                    html, body {
-//                        height: 50%;
-//            background-color: #d4cdcd;
-//            margin: 0;
-//            padding: 0;
-//        }
-//    </style>
-
-
-//                <h1 class="align-items-lg-center">find food trucks</h1>
-//                <form id="search">
-//                    <label for="query"> </label>
-//                    <input id="query">
-//                        <button>search</button>
-//    </form>
-
-
-//                    <script>
-//                        var map;
-//        function initmap() {
-//                            map = new google.maps.map(document.getelementbyid('map'), {
-//                                center: {
-//                                    lat: 42.958847999999996,
-//                                    lng: -87.9427584
-//                                },
-//                                zoom: 8
-
-//                            });
-//        }
-//    </script>
-//</head>
-//                <body>
-//                    <div id="map"></div>
-//                    <script src="https://maps.googleapis.com/maps/api/js?key=@api_key.googlemapsapikey&libraries=places&callback=initmap"
-//                        async defer></script>
-//                </body>
-//</html>
+//////////////////////////////////////////////////////////////////////////

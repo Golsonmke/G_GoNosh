@@ -15,18 +15,20 @@ namespace Go_Nosh.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IGoogleMapService _googleMapService;
+
         public FoodTrucksController(ApplicationDbContext context)
         {
             _context = context;
-            
+           
         }
 
         // GET: FoodTrucks
         public IActionResult Index()
         {
-            List<FoodTruck> foodTrucks = _context.FoodTrucks.ToList();
-            
-            
+          
+
+            var foodTrucks = _context.FoodTrucks.ToList();
+                
             return View(foodTrucks);
 
         }
@@ -52,6 +54,7 @@ namespace Go_Nosh.Controllers
         // GET: FoodTrucks/Create
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -72,7 +75,7 @@ namespace Go_Nosh.Controllers
         }
 
         // GET: FoodTrucks/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -123,7 +126,7 @@ namespace Go_Nosh.Controllers
         }
 
         // GET: FoodTrucks/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -155,5 +158,6 @@ namespace Go_Nosh.Controllers
         {
             return _context.FoodTrucks.Any(e => e.Id == id);
         }
+        
     }
 }

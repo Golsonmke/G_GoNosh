@@ -234,17 +234,12 @@ namespace Go_Nosh.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "cdc000fb-1c8e-46c0-8453-c51e38322f9e", "6d92da34-5b70-4d00-91e0-54a95176fa4f", "Admin", "ADMIN" });
+                values: new object[] { "1bcc77c5-eb31-4d2c-bfd3-082d9ff4c736", "0f5b36e6-45b8-4cd8-837a-7111fb0ea7cd", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0c56a3d3-8031-43ac-8ed1-be071dcc3696", "9c31ba9c-0a1e-4ab0-9598-5f0120f14868", "Customer", "CUSTOMER" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e7439168-f508-4ddf-8150-bc9f37ee554f", "18340461-342d-4d08-a8f2-e3202e6f651b", "Owner", "OWNER" });
+                values: new object[] { "044b77a1-7cdd-4b11-8cc0-e3dc37a4914c", "fa79d1f1-df75-4354-9bed-6307d2cf6918", "Owner", "OWNER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Go_Nosh.Data;
 using Go_Nosh.Models;
 using Go_Nosh.Contracts;
+using Go_Nosh.Services;
 
 namespace Go_Nosh.Controllers
 {
@@ -15,28 +16,30 @@ namespace Go_Nosh.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IGoogleMapService _googleMapService;
-
-        public FoodTrucksController(ApplicationDbContext context)
+        
+        public FoodTrucksController(ApplicationDbContext context, IGoogleMapService googleMapService)
         {
             _context = context;
-           
+            _googleMapService = googleMapService;
         }
+        
 
         // GET: FoodTrucks
         public IActionResult Index()
         {
-          
 
-            var foodTrucks = _context.FoodTrucks.ToList();
-                
-            return View(foodTrucks);
+
+            List<FoodTruck> foodTrucks = _context.FoodTrucks.ToList();
+            
+
+            return View(foodTrucks); 
 
         }
 
         // GET: FoodTrucks/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -54,7 +57,7 @@ namespace Go_Nosh.Controllers
         // GET: FoodTrucks/Create
         public IActionResult Create()
         {
-           
+            
             return View();
         }
 
@@ -158,6 +161,8 @@ namespace Go_Nosh.Controllers
         {
             return _context.FoodTrucks.Any(e => e.Id == id);
         }
+       
+       
         
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Threading.Tasks;
 
 namespace Go_Nosh.Models
 {
@@ -14,6 +15,11 @@ namespace Go_Nosh.Models
         [NotMapped]
         public Result[] results { get; set; }
         public string status { get; set; }
+
+        public static implicit operator Task<object>(FoodTruckAPI v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Result

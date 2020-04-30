@@ -5,6 +5,8 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Go_Nosh.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Go_Nosh.Services
 {
@@ -20,9 +22,9 @@ namespace Go_Nosh.Services
            
         }
      
-        public async Task<FoodTruckAPI> GetFoodTruck()
+        public async Task<FoodTruckAPI> GetFoodTrucks()
         {
-            string url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?query=Foodtrucks+in+Milwaukee&key=AIzaSyDfA2AwwISWPRAOEWKNrotIyAjtOv-9-XU";
+            string url = $"https://maps.googleapis.com/maps/api/place/textsearch/json?query=Foodtrucks+in+Milwaukee&key={API_KEY.googleMapsApiKey}";
 
             HttpClient client = new HttpClient();
 
@@ -32,7 +34,9 @@ namespace Go_Nosh.Services
             {
                 string json = await response.Content.ReadAsStringAsync();
                 FoodTruckAPI foodTruckAPI = JsonConvert.DeserializeObject<FoodTruckAPI>(json);
-                MapGoogleResultsToFoodTruckModel(foodTruckAPI);
+
+                
+
                 return foodTruckAPI;
                 
             }
@@ -40,31 +44,33 @@ namespace Go_Nosh.Services
             {
                 return null;
             }
-          
+           
         }
-        private  void MapGoogleResultsToFoodTruckModel(FoodTruckAPI foodTruckAPI)
+        private void MapGoogleResultsToFoodTruckModel(FoodTruckAPI foodTruckAPI)
         {
-
-            var foodTrucks = foodTruckAPI;
+           
+           var foodTrucks = foodTruckAPI;
 
             foreach (Result res in foodTrucks.results)
             {
                 //Turn each one of these messy arrays of info into an actual FoodTruck Object for your DB
-                FoodTruck ft = new FoodTruck();
-                ft.FoodTruckName = res.name;
-                ft.FoodTruckPhone = res.plus_code.compound_code;
-                ft.Lat = res.geometry.location.lat;
-                ft.Lng = res.geometry.location.lng;
-                ft.Address = res.formatted_address;
-                ft.FoodType = res.types.ToString();
-                ft.Price_level = res.price_level;
-                ft.Rating = res.rating;
-                ft.Place_Id = res.place_id;
+                FoodTruck ft = new FoodTruck
+                {
+                    FoodTruckName = res.name,
+                    FoodTruckPhone = res.plus_code.compound_code,
+                    Lat = res.geometry.location.lat,
+                    Lng = res.geometry.location.lng,
+                    Address = res.formatted_address,
+                    FoodType = res.types.ToString(),
+                    Price_level = res.price_level,
+                    Rating = res.rating,
+                    Place_Id = res.place_id
+                };
                 //add all the properties one at a time.
                 _context.FoodTrucks.Add(ft);
                 
             }
-            _context.SaveChanges();
+             _context.SaveChanges();
         }
            
 
@@ -107,7 +113,47 @@ namespace Go_Nosh.Services
                 return dinner;
             }
         }
+    //    public async Task<List<FoodTruck>> GetListOfFoodTrucks(string foodType, Customer customer, List<FoodTruck> foodTrucks )
+    //    {
+
+    //        //generate the potential URL;
+    //        string customerFoodType = customer.FavoriteFood;
+    //         List<FoodTruck> preferredFood = _context.Customers.Where(a => a.FavoriteFood == foodType).SelectMany(foodTrucks);
+
+            
+            
+
+    //        return foodTruckList;
+
+    //    }
+    //    private async Task<object> FoodTruckRecommendation(string foodType, FoodTruckAPI foodTruckAPI)
+    //    {
+    //        if (foodType == null)
+    //        {
+    //            //we don't have enough sugar
+    //            var foodTruck = await GetFoodTrucks();
+                
+    //            MapGoogleResultsToFoodTruckModel(foodTruckAPI);
+    //            var listofFoodTrucks = GetFoodTrucksList(foodType);
+
+    //            return listofFoodTrucks;
+    //        }
+    //        else
+    //        {
+    //            //we realize we have the right amount.
+    //            var listofFoodTrucks = GetFoodTrucksList(foodType);
+
+    //            return listofFoodTrucks;
+    //        }
+    //    }
+
+    //    private object GetFoodTrucksList(object listofFoodTrucks)
+    //    {
+    //        listofFoodTrucks = new List<FoodTruck>();
+    //    }
     }
+
+
 
 }
    

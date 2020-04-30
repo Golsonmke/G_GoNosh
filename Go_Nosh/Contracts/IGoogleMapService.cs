@@ -8,7 +8,7 @@ namespace Go_Nosh.Contracts
 {
     public interface IGoogleMapService
     {
-        Task<FoodTruckAPI> GetFoodTruck();
+        Task<FoodTruckAPI> GetFoodTrucks();
         
     }
 }

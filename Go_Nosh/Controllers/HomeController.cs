@@ -24,10 +24,9 @@ namespace Go_Nosh.Controllers
             _googleMapService = googleMapService;
         }
 
-        public  IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            Task<FoodTruckAPI> foodTruckAPI = _googleMapService.GetFoodTruck();
-        
+            FoodTruckAPI foodTruckAPI = await _googleMapService.GetFoodTrucks();
             return View(foodTruckAPI);
 
         }

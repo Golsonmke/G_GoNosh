@@ -1,13 +1,10 @@
 ﻿
-
 @{
     ViewData["Title"] = "Home Page";
 
-   
-
 }
 
-    <html>
+<html>
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
@@ -22,16 +19,20 @@
 
             html, body {
                 height: 50%;
-                background-image: url('milwaukee.jpg');
+                background-image: url('milwaukee.jpg');     
                 background-position: center;
-                align-content: center margin: 0px;
-                padding: 0px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
             }
         </style>
 
     </head>
-    <body>
-        <img class="position-static" src="GO Nosh.png" alt="Go Nosh Truck"  height="400px" width="800px" >
-
+    <body >
+        <div class="">
+            <img class="position-relative" src="GO Nosh.png" alt="Go Nosh Truck" height="50%" width="100%">
+        </div>
     </body>
     </html>
+
+

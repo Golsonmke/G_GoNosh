@@ -113,44 +113,26 @@ namespace Go_Nosh.Services
                 return dinner;
             }
         }
-    //    public async Task<List<FoodTruck>> GetListOfFoodTrucks(string foodType, Customer customer, List<FoodTruck> foodTrucks )
-    //    {
-
-    //        //generate the potential URL;
-    //        string customerFoodType = customer.FavoriteFood;
-    //         List<FoodTruck> preferredFood = _context.Customers.Where(a => a.FavoriteFood == foodType).SelectMany(foodTrucks);
-
+       
+        public List<FoodTruck> Recommendation(FoodTruck foodTruck, Customer customer)
+        {
+            List<FoodTruck> foodTrucks = new List<FoodTruck>();
             
+            if ( foodTruck.FoodType == customer.FavoriteFood && foodTruck.Rating >= 4)
+            {
+
+                return foodTrucks.ToList(); 
+            }
+            else
+            {
+                return null;
+            }
             
+        }
 
-    //        return foodTruckList;
+      
 
-    //    }
-    //    private async Task<object> FoodTruckRecommendation(string foodType, FoodTruckAPI foodTruckAPI)
-    //    {
-    //        if (foodType == null)
-    //        {
-    //            //we don't have enough sugar
-    //            var foodTruck = await GetFoodTrucks();
-                
-    //            MapGoogleResultsToFoodTruckModel(foodTruckAPI);
-    //            var listofFoodTrucks = GetFoodTrucksList(foodType);
 
-    //            return listofFoodTrucks;
-    //        }
-    //        else
-    //        {
-    //            //we realize we have the right amount.
-    //            var listofFoodTrucks = GetFoodTrucksList(foodType);
-
-    //            return listofFoodTrucks;
-    //        }
-    //    }
-
-    //    private object GetFoodTrucksList(object listofFoodTrucks)
-    //    {
-    //        listofFoodTrucks = new List<FoodTruck>();
-    //    }
     }
 
 

@@ -67,8 +67,7 @@ namespace Go_Nosh.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                customer.IdentityUserId = userId;
+                
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +90,7 @@ namespace Go_Nosh.Controllers
                 return NotFound();
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(_context.FoodTrucks);
+            return View(customer);
         }
 
         // POST: Customers/Edit/5
